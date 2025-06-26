@@ -1,0 +1,36 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: ./HQ-project-back
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/hgd
+      SPRING_DATASOURCE_USERNAME: yurikon
+      SPRING_DATASOURCE_PASSWORD: 123456
+
+  frontend:
+    build:
+      context: ./HQFrontEnd
+    ports:
+      - "80:80"
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hgd
+      MYSQL_USER: yurikon
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # 挂载SQL文件
+
+volumes:
+  mysql_data:
