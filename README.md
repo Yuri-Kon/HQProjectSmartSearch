@@ -22,6 +22,11 @@
 ### 启动步骤
 
 1. 克隆或解压本项目
+
+```bash
+git clone https://github.com/Yuri-Kon/HQProjectSmartSearch.git
+```
+
 2. 进入项目目录，执行：
 
 ```bash
